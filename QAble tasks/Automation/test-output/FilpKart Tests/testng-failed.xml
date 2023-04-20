@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [FilpKart Tests]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="TestChrome(failed)">
+    <classes>
+      <class name="tests.Flipkart_TC">
+        <methods>
+          <include name="closeSession"/>
+          <include name="search_Mobile_Phone_Test"/>
+          <include name="launchFlipkart"/>
+        </methods>
+      </class> <!-- tests.Flipkart_TC -->
+    </classes>
+  </test> <!-- TestChrome(failed) -->
+</suite> <!-- Failed suite [FilpKart Tests] -->

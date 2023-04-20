@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="FilpKart Tests">
+	<test name="TestChrome">
+		<classes>
+			<class name="tests.Flipkart_TC">
+				<methods>
+					<include
+						name="search_Mobile_Phone_Test" />
+				</methods>
+			</class>
+
+		</classes>
+	</test>
+</suite> 
+			
