@@ -1,17 +1,21 @@
 package tests;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
 
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
 public class APIAutomation {
+	
+	/**
+	 * #1 creating new user with POST
+	 * request and validating the created user with GET request
+	 * @return: request
+	 */
 	
 	public static JSONObject createUser() {
 		
@@ -55,6 +59,13 @@ public class APIAutomation {
 		  return request;
 	}
 	
+	/**
+	 * #2 retrieving existing user using
+	 * GET request and validating all
+	 * the required fields
+	 * @param: jobj
+	 */
+	
 	public static void validateExistingUser(JSONObject jobj) {
 		Map<String, String> userMap = new HashMap<String,String>();
 		userMap.put("id", jobj.get("id").toString());
@@ -72,6 +83,13 @@ public class APIAutomation {
 		response.then().extract().jsonPath().getString("website").isEmpty();
 		response.then().extract().jsonPath().getString("company").isEmpty();
 	}
+	
+	/**
+	 * #3 updating the existing user using PUT
+	 * request and verifying whether user is
+	 * updated or not by retrieving user with GET request
+	 * @param: jobj
+	 */
 	
 	public static void updateUser(JSONObject jobj) {
 		System.out.println(jobj.put("name", "PM"));
@@ -91,6 +109,13 @@ public class APIAutomation {
 		System.out.println(jobj.get("name").equals("PM"));
 	}
 	
+	/**
+	 * #4 deleting the existing user by sending DELETE request and
+	 * validating that user is deleted or not 
+	 * by retrieving using GET request
+	 * @param: jobj
+	 */
+	
 	public static void deleteUser(JSONObject jobj) {
 		given()
 			.body(jobj.toJSONString())
@@ -105,6 +130,12 @@ public class APIAutomation {
         .when()
         .get("https://jsonplaceholder.typicode.com/users/{id}").then().assertThat().statusCode(404);
 	}
+	
+	/**
+	 * #5 creating new post for an existing user with POST
+	 * request and validating the created post with GET request
+	 * @return: request
+	 */
 	
 	public static JSONObject createNewPost() {
 		JSONObject request = new JSONObject(); 
@@ -130,6 +161,13 @@ public class APIAutomation {
 		return request;
 	}
 	
+	/**
+	 * #6 retrieving existing post using
+	 * GET request and validating all
+	 * the required fields
+	 * @param: jobj
+	 */
+	
 	public static void validatePost(JSONObject jobj) {
 		Map<String, String> userMap = new HashMap<String,String>();
 		userMap.put("id", jobj.get("id").toString());
@@ -143,6 +181,13 @@ public class APIAutomation {
 		response.then().extract().jsonPath().getString("title").isEmpty();
 		response.then().extract().jsonPath().getString("body").isEmpty();
 	}
+	
+	/**
+	 * #7 updating the existing post using PUT
+	 * request and verifying whether post is
+	 * updated or not by retrieving the post with GET request
+	 * @param: jobj
+	 */
 	
 	public static void updatePost(JSONObject jobj) {
 		System.out.println(jobj.put("title", "Updated Post"));
@@ -162,6 +207,13 @@ public class APIAutomation {
 		System.out.println(jobj.get("title").equals("Updated Post"));
 	}
 	
+	/**
+	 * #8 deleting the existing post by sending DELETE request and
+	 * validating that post is deleted or not 
+	 * by retrieving post using GET request
+	 * @param: jobj
+	 */
+	
 	public static void deletePost(JSONObject jobj) {
 		given()
 		.body(jobj.toJSONString())
@@ -176,6 +228,12 @@ public class APIAutomation {
 	    .when()
 	    .get("https://jsonplaceholder.typicode.com/posts/{id}").then().assertThat().statusCode(404);
 	}
+	
+	/**
+	 * #9 creating new comment for an existing post with POST
+	 * request and validating the created comment with GET request
+	 * @return: request
+	 */
 	
 	public static JSONObject createComment() {
 		JSONObject request = new JSONObject(); 
@@ -201,6 +259,13 @@ public class APIAutomation {
 		System.out.println(responseValidity);
 		return request;
 	}
+	
+	/**
+	 * #10 retrieving existing comment using
+	 * GET request and validating all
+	 * the required fields
+	 * @param: jobj
+	 */
 	
 	public static void validateComment(JSONObject jobj) {
 		Map<String, String> userMap = new HashMap<String,String>();
