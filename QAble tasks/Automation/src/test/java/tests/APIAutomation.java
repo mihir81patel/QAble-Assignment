@@ -40,7 +40,6 @@ public class APIAutomation {
 		  cmpny.put("name", "gfc");
 		  cmpny.put("catchPhrase", "hgtf jhty");
 		  cmpny.put("bs", "hg");
-		  request.put("geo", geo);
 		  
 		  given().
 			body(request.toJSONString()).
@@ -56,6 +55,7 @@ public class APIAutomation {
 	                .extract().jsonPath().getString("id").equals("11");
 		  
 		  System.out.println(responseValidity);
+		  System.out.println("User created");
 		  return request;
 	}
 	
@@ -82,6 +82,7 @@ public class APIAutomation {
 		response.then().extract().jsonPath().getString("phone").isEmpty();
 		response.then().extract().jsonPath().getString("website").isEmpty();
 		response.then().extract().jsonPath().getString("company").isEmpty();
+		System.out.println("User validated");
 	}
 	
 	/**
@@ -107,6 +108,7 @@ public class APIAutomation {
         .when()
         .get("https://jsonplaceholder.typicode.com/users/{id}").then().log().all();
 		System.out.println(jobj.get("name").equals("PM"));
+		System.out.println("User updated");
 	}
 	
 	/**
@@ -129,6 +131,7 @@ public class APIAutomation {
         .pathParam("id", jobj.get("id"))
         .when()
         .get("https://jsonplaceholder.typicode.com/users/{id}").then().assertThat().statusCode(404);
+		System.out.println("User deleted");
 	}
 	
 	/**
@@ -140,7 +143,7 @@ public class APIAutomation {
 	public static JSONObject createNewPost() {
 		JSONObject request = new JSONObject(); 
 		request.put("userId", 1); 
-		request.put("id",11); 
+		request.put("id",101); 
 		request.put("title", "New Post"); 
 		request.put("body","This is new Post");
 		
@@ -158,6 +161,7 @@ public class APIAutomation {
                 .extract().jsonPath().getString("id").equals("11");
 	  
 		System.out.println(responseValidity);
+		System.out.println("Post created");
 		return request;
 	}
 	
@@ -180,6 +184,7 @@ public class APIAutomation {
 		response.then().extract().jsonPath().getString("id").isEmpty();
 		response.then().extract().jsonPath().getString("title").isEmpty();
 		response.then().extract().jsonPath().getString("body").isEmpty();
+		System.out.println("Post validated");
 	}
 	
 	/**
@@ -205,6 +210,7 @@ public class APIAutomation {
         .when()
         .get("https://jsonplaceholder.typicode.com/posts/{id}").then().log().all();
 		System.out.println(jobj.get("title").equals("Updated Post"));
+		System.out.println("Post updated");
 	}
 	
 	/**
@@ -227,6 +233,7 @@ public class APIAutomation {
 	    .pathParam("id", jobj.get("id"))
 	    .when()
 	    .get("https://jsonplaceholder.typicode.com/posts/{id}").then().assertThat().statusCode(404);
+		System.out.println("Post deleted");
 	}
 	
 	/**
@@ -257,6 +264,7 @@ public class APIAutomation {
                 .extract().jsonPath().getString("id").equals("6");
 	  
 		System.out.println(responseValidity);
+		System.out.println("Comment created");
 		return request;
 	}
 	
@@ -280,6 +288,7 @@ public class APIAutomation {
 		response.then().extract().jsonPath().getString("name").isEmpty();
 		response.then().extract().jsonPath().getString("email").isEmpty();
 		response.then().extract().jsonPath().getString("body").isEmpty();
+		System.out.println("Comment validated");
 	}
 
 	public static void main(String[] args) {
