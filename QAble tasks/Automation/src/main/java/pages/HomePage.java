@@ -73,8 +73,10 @@ public class HomePage{
 	 @FindBy(xpath = "//div[@class='_2sKwjB']")
 	 private WebElement byMessageItemRemoved;
 	 
-	 @FindBy(xpath = "//div[@class='_2kHMtA']")
-	 private List<WebElement> byLstOfProducts;
+	 @FindBy(xpath = "(//div[@class='_13J9qT'])[1]")
+	 private WebElement byCheapestProduct;
+	 
+	 
 	 
 	 
 	 /**
@@ -124,8 +126,8 @@ public class HomePage{
 		 */
 	 public void addPhoneToCart() {
 		 String parent=driver.getWindowHandle();
-		 //wait.until(ExpectedConditions.elementToBeClickable(cheapestPricedPhone));
-		 waitAndClick(byLstOfProducts.get(0));
+		 wait.until(ExpectedConditions.elementToBeClickable(cheapestPricedPhone));
+		 waitAndClick(byCheapestProduct);
 		 try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -137,12 +139,14 @@ public class HomePage{
 				 String child_window=I1.next();
 				 if(!parent.equals(child_window)) {
 					 driver.switchTo().window(child_window);
+					 driver.navigate().refresh();
 					 js.executeScript("arguments[0].scrollIntoView()", addCrtBtn);
 					 Assert.assertEquals(addCrtBtn.isEnabled(), true);
 					 waitAndClick(addCrtBtn);
-					 wait.until(ExpectedConditions.invisibilityOf(byBtnRemoveItem));
+					 wait.until(ExpectedConditions.visibilityOf(byBtnRemoveItem));
 					 waitAndClick(byBtnRemoveItem);
 					 waitAndClick(byBtnRemoveFromPopUp);
+					 wait.until(ExpectedConditions.visibilityOf(byMessageItemRemoved));
 					 Assert.assertEquals(byMessageItemRemoved.isDisplayed(), true);
 					 driver.close();
 				 }
